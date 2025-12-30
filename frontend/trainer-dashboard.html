@@ -2,95 +2,49 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Trainer Dashboard | LMS</title>
+  <title>Trainer Dashboard</title>
   <link rel="stylesheet" href="trainer-dashboard.css">
 </head>
 <body>
-
-<div class="container">
-
-  <!-- Sidebar -->
-  <aside class="sidebar">
-    <h2 class="logo">LMS</h2>
+  <div class="sidebar">
+    <h2>LMS</h2>
     <ul>
-      <li class="active">Dashboard</li>
+      <li>Dashboard</li>
       <li>My Courses</li>
-      <li>Students</li>
-      <li>Reports</li>
+      <li>Progress</li>
+      <li>Certificates</li>
       <li>Profile</li>
-      <li>Logout</li>
     </ul>
-  </aside>
+  </div>
 
-  <!-- Main -->
-  <main class="main">
-    <header class="top">
-      <h2>Welcome back 👋</h2>
-      <button class="logout">Logout</button>
-    </header>
+  <div class="main">
+    <h2>Welcome back 👋</h2>
 
-    <!-- Stats -->
-    <section class="stats">
+    <div class="stats">
       <div class="card">
-        <h4>Total Courses</h4>
-        <p>6</p>
+        <h3>Enrolled Courses</h3>
+        <p id="enrolled-courses">0</p>
       </div>
       <div class="card">
-        <h4>Total Students</h4>
-        <p>120</p>
+        <h3>Learning Hours</h3>
+        <p id="learning-hours">0</p>
       </div>
       <div class="card">
-        <h4>Active Courses</h4>
-        <p>4</p>
+        <h3>Completed</h3>
+        <p id="completed">0</p>
       </div>
       <div class="card">
-        <h4>Completion Rate</h4>
-        <p>78%</p>
+        <h3>Certificates</h3>
+        <p id="certificates">0</p>
       </div>
-    </section>
+    </div>
 
-    <!-- Courses -->
-    <section class="courses">
-      <h3>My Courses</h3>
+    <h3>Trainer List</h3>
+    <div id="trainer-cards" class="trainer-cards">
+      <!-- Trainers will be loaded here dynamically -->
+    </div>
+  </div>
 
-      <div class="course">
-        <div>
-          <h4>MERN Stack Development</h4>
-          <div class="actions">
-            <button onclick="addModule()">Add Module</button>
-            <button onclick="addContent()">Add Content</button>
-            <button onclick="viewStudents()">Students</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="course">
-        <div>
-          <h4>Python Full Stack</h4>
-          <div class="actions">
-            <button>Add Module</button>
-            <button>Add Content</button>
-            <button>Students</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="course">
-        <div>
-          <h4>Data Analytics</h4>
-          <div class="actions">
-            <button>Add Module</button>
-            <button>Add Content</button>
-            <button>Students</button>
-          </div>
-        </div>
-      </div>
-
-    </section>
-  </main>
-
-</div>
-
-<script src="trainer-dashboard.js"></script>
+  <script src="trainer-dashboard.js"></script>
 </body>
 </html>

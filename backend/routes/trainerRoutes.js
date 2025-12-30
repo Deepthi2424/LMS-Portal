@@ -8,6 +8,7 @@ const router = express.Router();
 
 router.post("/course", auth, async (req, res) => {
   if (req.user.role !== "trainer")
+    
     return res.status(403).send();
 
   const course = new Course({
@@ -15,18 +16,17 @@ router.post("/course", auth, async (req, res) => {
     trainerId: req.user.id
   });
   await course.save();
-  res.json(course);
+  res.json({ message: "Create course API working" });
 });
 
 router.post("/module", auth, async (req, res) => {
   const module = new Module(req.body);
   await module.save();
-  res.json(module);
+  res.json({ message: "Add module API working" });
 });
-
 router.get("/students/:courseId", auth, async (req, res) => {
   const students = await Enrollment.find({ courseId: req.params.courseId });
-  res.json(students);
+ res.json({ message: "View students API working" });
 });
 
 module.exports = router;
