@@ -94,10 +94,26 @@
       </div>
     </div>
 
-    <h3>Trainer List</h3>
-    <div id="trainer-list"></div>
-      <!-- Trainers will be added here by JS -->
+   <h2>Trainer List</h2>
+<div id="trainer-list"></div>
+<script src="trainer-dashboard.js"></script>
 
-  <script src="trainer-dashboard.js"></script>
+<div class="trainer-metrics">
+  <div id="total-courses" class="metric-card"></div>
+  <div id="total-students" class="metric-card"></div>
+  <div id="total-lessons" class="metric-card"></div>
+</div>
+
+<div class="trainer-card">
+  <h3>John Trainer</h3>
+  <p>Email: john@lms.com</p>
+  <p>Course: MERN Stack</p>
+  <p>Status: Active</p>
+  <button onclick="viewStudents('trainerId')">View Students</button>
+  <button onclick="addModule('trainerId')">Add Module</button>
+</div>
+
+<div id="trainer-courses"></div>
+
 </body>
 </html>

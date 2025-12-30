@@ -1,17 +1,18 @@
+// backend/server.js
 const express = require("express");
-const mongoose = require("mongoose");
 const cors = require("cors");
+const mongoose = require("mongoose");
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// MongoDB connection (Docker / local)
-mongoose.connect("mongodb://127.0.0.1:27017/lmsPortal")
+// Connect to MongoDB
+mongoose.connect("mongodb://admin:admin123@127.0.0.1:27017/lmsPortal?authSource=admin")
   .then(() => console.log("MongoDB connected"))
-  .catch(err => console.error("Mongo error:", err));
+  .catch(err => console.error("MongoDB connection error:", err));
 
-// Trainer schema
+// Trainer Schema
 const trainerSchema = new mongoose.Schema({
   name: String,
   email: String,
@@ -21,7 +22,7 @@ const trainerSchema = new mongoose.Schema({
 
 const Trainer = mongoose.model("Trainer", trainerSchema);
 
-// API route
+// API to get all trainers
 app.get("/api/trainer", async (req, res) => {
   try {
     const trainers = await Trainer.find();
@@ -31,11 +32,15 @@ app.get("/api/trainer", async (req, res) => {
   }
 });
 
-// Root route (to avoid Cannot GET /)
-app.get("/", (req, res) => {
-  res.send("LMS Backend Running");
-});
+app.listen(5000, () => console.log("Server running on port 5000"));
 
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
+// server.js
+app.get("/api/courses/:trainerId", async (req, res) => {
+  const trainerId = req.params.trainerId;
+  try {
+    const courses = await Course.find({ trainerId });
+    res.json(courses);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
