@@ -1,31 +1,21 @@
-const API_URL = "https://opulent-waffle-jjvgqx46xvqr3q5j6-5000.app.github.dev/api/trainer";
-
-
+const API_URL = "http://localhost:5000/api/trainer"; // Use your backend URL
 
 function loadTrainers() {
   fetch(API_URL)
     .then(res => res.json())
     .then(trainers => {
-      const container = document.getElementById("trainer-cards");
-      container.innerHTML = "";
-
+      const container = document.getElementById("trainer-list");
+      container.innerHTML = ""; // Clear previous
       trainers.forEach(trainer => {
-        const card = document.createElement("div");
-        card.className = "trainer-card";
-        card.innerHTML = `
-          <h4>${trainer.name}</h4>
-          <p><strong>Email:</strong> ${trainer.email}</p>
-          <p><strong>Course:</strong> ${trainer.course}</p>
-          <p><strong>Status:</strong> ${trainer.status}</p>
+        container.innerHTML += `
+          <div class="trainer-card">
+            <h4>${trainer.name}</h4>
+            <p>${trainer.email}</p>
+            <p>${trainer.course}</p>
+            <p>${trainer.status}</p>
+          </div>
         `;
-        container.appendChild(card);
       });
-
-      // Update stats
-      document.getElementById("enrolled-courses").innerText = trainers.length;
-      document.getElementById("learning-hours").innerText = 42; // placeholder
-      document.getElementById("completed").innerText = 3; // placeholder
-      document.getElementById("certificates").innerText = 2; // placeholder
     })
     .catch(err => console.error(err));
 }
