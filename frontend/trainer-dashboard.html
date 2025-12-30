@@ -3,31 +3,86 @@
 <head>
   <meta charset="UTF-8">
   <title>Trainer Dashboard</title>
-  <link rel="stylesheet" href="trainer-dashboard.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f5f6fa;
+    }
+    .sidebar {
+      width: 200px;
+      background: #5c5ce0;
+      height: 100vh;
+      position: fixed;
+      color: white;
+      padding: 20px;
+    }
+    .sidebar a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      margin: 15px 0;
+      font-weight: bold;
+    }
+    .main {
+      margin-left: 220px;
+      padding: 20px;
+    }
+    h2 {
+      margin-bottom: 20px;
+    }
+    .cards {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+      flex: 1;
+      text-align: center;
+    }
+    .trainer-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+    }
+    .trainer-card {
+      background: white;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    }
+    .trainer-card h4 {
+      margin: 0 0 10px 0;
+    }
+    .trainer-card p {
+      margin: 5px 0;
+    }
+  </style>
 </head>
 <body>
   <div class="sidebar">
     <h2>LMS</h2>
-    <ul>
-      <li>Dashboard</li>
-      <li>My Courses</li>
-      <li>Progress</li>
-      <li>Certificates</li>
-      <li>Profile</li>
-    </ul>
+    <a href="#">Dashboard</a>
+    <a href="#">My Courses</a>
+    <a href="#">Progress</a>
+    <a href="#">Certificates</a>
+    <a href="#">Profile</a>
   </div>
 
   <div class="main">
     <h2>Welcome back 👋</h2>
-
-    <div class="stats">
+    <div class="cards">
       <div class="card">
         <h3>Enrolled Courses</h3>
-        <p id="enrolled-courses">0</p>
+        <p id="enrolled">0</p>
       </div>
       <div class="card">
         <h3>Learning Hours</h3>
-        <p id="learning-hours">0</p>
+        <p id="hours">0</p>
       </div>
       <div class="card">
         <h3>Completed</h3>
@@ -40,9 +95,11 @@
     </div>
 
     <h3>Trainer List</h3>
-    <div id="trainer-list"></div>
-      <!-- Trainers will be loaded here dynamically -->
-   
+    <div class="trainer-list" id="trainer-list">
+      <!-- Trainers will be added here by JS -->
+    </div>
+  </div>
+
   <script src="trainer-dashboard.js"></script>
 </body>
 </html>
