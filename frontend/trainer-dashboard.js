@@ -1,26 +1,22 @@
-// Use your Codespaces forwarded URL
 const API_URL = "https://opulent-waffle-jjvgqx46xvqr3q5j6-5000.app.github.dev/api/trainer";
 
-function loadTrainers() {
-  fetch(API_URL)
-    .then(res => res.json())
-    .then(trainers => {
-      const container = document.getElementById("trainer-list");
-      container.innerHTML = ""; // clear existing
-      trainers.forEach(trainer => {
-        const card = document.createElement("div");
-        card.classList.add("trainer-card");
-        card.innerHTML = `
-          <h4>${trainer.name}</h4>
-          <p><strong>Email:</strong> ${trainer.email}</p>
-          <p><strong>Course:</strong> ${trainer.course}</p>
-          <p><strong>Status:</strong> ${trainer.status}</p>
-        `;
-        container.appendChild(card);
-      });
-    })
-    .catch(err => console.error(err));
-}
+fetch(API_URL)
+  .then(res => res.json())
+  .then(trainers => {
+    console.log(trainers); // 🔴 IMPORTANT
+    const container = document.getElementById("trainer-list");
+    container.innerHTML = "";
 
-// Load trainers when page loads
-window.onload = loadTrainers;
+    trainers.forEach(t => {
+      const div = document.createElement("div");
+      div.innerHTML = `
+        <h4>${t.name}</h4>
+        <p>${t.email}</p>
+        <p>${t.course}</p>
+        <p>${t.status}</p>
+        <hr/>
+      `;
+      container.appendChild(div);
+    });
+  })
+  .catch(err => console.error("Fetch error:", err));

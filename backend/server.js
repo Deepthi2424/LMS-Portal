@@ -1,17 +1,17 @@
 const express = require("express");
-const cors = require("cors");
 const mongoose = require("mongoose");
+const cors = require("cors");
+
 const app = express();
-
 app.use(cors());
-app.use(express.json()); // for parsing JSON
+app.use(express.json());
 
-// Connect to MongoDB
-mongoose.connect("mongodb://admin:admin123@localhost:27017/lmsPortal?authSource=admin")
+// MongoDB connection (Docker / local)
+mongoose.connect("mongodb://127.0.0.1:27017/lmsPortal")
   .then(() => console.log("MongoDB connected"))
-  .catch(err => console.log(err));
+  .catch(err => console.error("Mongo error:", err));
 
-// Trainer schema and model
+// Trainer schema
 const trainerSchema = new mongoose.Schema({
   name: String,
   email: String,
@@ -21,27 +21,21 @@ const trainerSchema = new mongoose.Schema({
 
 const Trainer = mongoose.model("Trainer", trainerSchema);
 
-// GET all trainers
+// API route
 app.get("/api/trainer", async (req, res) => {
   try {
     const trainers = await Trainer.find();
     res.json(trainers);
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ error: err.message });
   }
 });
 
-// POST route to add trainer (optional)
-app.post("/api/trainer", async (req, res) => {
-  const { name, email, course, status } = req.body;
-  const trainer = new Trainer({ name, email, course, status });
-  try {
-    const savedTrainer = await trainer.save();
-    res.status(201).json(savedTrainer);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
+// Root route (to avoid Cannot GET /)
+app.get("/", (req, res) => {
+  res.send("LMS Backend Running");
 });
 
-// Start server
-app.listen(5000, () => console.log("Server running on port 5000"));
+app.listen(5000, () => {
+  console.log("Server running on port 5000");
+});
