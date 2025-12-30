@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:5000/api/trainer"; // Use your backend URL
+const API_URL = "https://opulent-waffle-jjvgqx46xvqr3q5j6-5000.app.github.dev/api/trainer"; // Use your backend URL
 
 function loadTrainers() {
   fetch(API_URL)
